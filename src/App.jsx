@@ -49,7 +49,15 @@ export default function App() {
 
       <section className="movies">
         {popularityOrderedMovies?.map(
-          ({ id, title, overview, vote_average, popularity, poster_path }) => (
+          ({
+            id,
+            title,
+            overview,
+            vote_average,
+            popularity,
+            poster_path,
+            genre_ids,
+          }) => (
             <Card
               key={id}
               title={title}
@@ -57,6 +65,7 @@ export default function App() {
               vote_average={vote_average}
               popularity={popularity}
               poster_path={poster_path}
+              genre_ids={genre_ids}
             />
           )
         )}

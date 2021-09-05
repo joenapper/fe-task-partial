@@ -1,4 +1,11 @@
-const Card = ({ title, overview, vote_average, popularity, poster_path }) => {
+const Card = ({
+  title,
+  overview,
+  vote_average,
+  popularity,
+  poster_path,
+  genre_ids,
+}) => {
   return (
     <div className="movie">
       <img
@@ -13,6 +20,12 @@ const Card = ({ title, overview, vote_average, popularity, poster_path }) => {
         <p>{overview}</p>
         <p>Rating: {vote_average}/10</p>
         <p>Popularity: {popularity}</p>
+        <p>
+          Genres:{' '}
+          {genre_ids.map((id) => (
+            <span key={id}>{id}, </span>
+          ))}
+        </p>
       </div>
     </div>
   );
