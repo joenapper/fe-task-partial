@@ -26,6 +26,10 @@ export default function App() {
     getData();
   }, []);
 
+  const popularityOrderedMovies = movies?.sort(function (a, b) {
+    return b.popularity - a.popularity;
+  });
+
   return (
     <main className="container">
       <h1>
@@ -44,15 +48,17 @@ export default function App() {
       </section>
 
       <section className="movies">
-        {movies?.map(({ id, title, overview, vote_average, popularity }) => (
-          <Card
-            key={id}
-            title={title}
-            overview={overview}
-            vote_average={vote_average}
-            popularity={popularity}
-          />
-        ))}
+        {popularityOrderedMovies?.map(
+          ({ id, title, overview, vote_average, popularity }) => (
+            <Card
+              key={id}
+              title={title}
+              overview={overview}
+              vote_average={vote_average}
+              popularity={popularity}
+            />
+          )
+        )}
       </section>
     </main>
   );
