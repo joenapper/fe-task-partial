@@ -1,11 +1,33 @@
+import { useState, useEffect } from 'react';
 import { fetchGenres, fetchMovies } from './api'; // you may add functionality to these functions, but please use them
 import './styles.css'; // have a look at this file and feel free to use the classes
 import Genre from './components/Genre';
 import Card from './components/Card';
 
 export default function App() {
+  const [genres, setGenres] = useState(null);
+  const [movies, setMovies] = useState(null);
+
+  useEffect(() => {
+    async function getData() {
+      try {
+        const genresResponse = await fetchGenres();
+        const genresData = await genresResponse.json();
+        setGenres(genresData);
+
+        const moviesResponse = await fetchMovies();
+        const moviesData = await moviesResponse.json();
+        setMovies(moviesData);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    getData();
+  }, []);
+
   return (
-    <main>
+    <main className="container">
       <h1>
         <span>
           <span role="img" aria-label="Popcorn emoji">
@@ -15,12 +37,22 @@ export default function App() {
         </span>
       </h1>
 
-      <section>
-        <Genre />
+      <section className="genres-list">
+        {genres?.map(({ id, name }) => (
+          <Genre key={id} id={id} name={name} />
+        ))}
       </section>
 
-      <section>
-        <Card />
+      <section className="movies">
+        {movies?.map(({ id, title, overview, vote_average, popularity }) => (
+          <Card
+            key={id}
+            title={title}
+            overview={overview}
+            vote_average={vote_average}
+            popularity={popularity}
+          />
+        ))}
       </section>
     </main>
   );

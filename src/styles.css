@@ -53,8 +53,13 @@ h2 {
   padding-bottom: 1.5rem;
 }
 
-/* Perhaps a grid? */
 .genres-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.genres-list > * {
+  padding: 0.5rem;
 }
 
 .movies {

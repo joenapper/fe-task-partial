@@ -1,7 +1,15 @@
-const Genre = () => {
+const Genre = ({ id, name }) => {
   return (
     <div>
-      <h1>Genres</h1>
+      <input
+        onClick={() => console.log(name)}
+        type="checkbox"
+        name={name}
+        id={name}
+      />
+      <label htmlFor={name}>
+        {id} - {name}
+      </label>
     </div>
   );
 };
